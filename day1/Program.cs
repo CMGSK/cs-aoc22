@@ -2,6 +2,8 @@
 {
   class Program
   {
+
+    //C-Sharp way
     public static IEnumerable<long> GroupedElf (string data)
     {
       return data.Split(Environment.NewLine + Environment.NewLine)
@@ -10,20 +12,17 @@
 
     public static void Main (string[] args)
     {
-
-      // string[] input = File.ReadAllLines("input.txt");
-
-      //Part 1 cs
+      //Part 1 
        IEnumerable<long> elfdata = GroupedElf(File.ReadAllText("input.txt"));
        Console.WriteLine(elfdata.Max());
 
-      //Part 2 cs
-      
+      //Part 2
        Console.WriteLine(elfdata.OrderByDescending(elf => elf).Take(3).Sum());
 
 
-
-      //Part 1
+      // Dull way
+      // string[] input = File.ReadAllLines("input.txt");
+      // Part 1
       // int res = 0;
       // int block = 0;
       // for (int i = 0; i<input.Count(); i++)
