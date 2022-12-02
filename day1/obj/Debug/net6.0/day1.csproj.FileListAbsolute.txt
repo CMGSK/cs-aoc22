@@ -1,0 +1,15 @@
+/home/miku/programming/cs/AOC22/day1/bin/Debug/net6.0/day1
+/home/miku/programming/cs/AOC22/day1/bin/Debug/net6.0/day1.deps.json
+/home/miku/programming/cs/AOC22/day1/bin/Debug/net6.0/day1.runtimeconfig.json
+/home/miku/programming/cs/AOC22/day1/bin/Debug/net6.0/day1.dll
+/home/miku/programming/cs/AOC22/day1/bin/Debug/net6.0/ref/day1.dll
+/home/miku/programming/cs/AOC22/day1/bin/Debug/net6.0/day1.pdb
+/home/miku/programming/cs/AOC22/day1/obj/Debug/net6.0/day1.csproj.AssemblyReference.cache
+/home/miku/programming/cs/AOC22/day1/obj/Debug/net6.0/day1.GeneratedMSBuildEditorConfig.editorconfig
+/home/miku/programming/cs/AOC22/day1/obj/Debug/net6.0/day1.AssemblyInfoInputs.cache
+/home/miku/programming/cs/AOC22/day1/obj/Debug/net6.0/day1.AssemblyInfo.cs
+/home/miku/programming/cs/AOC22/day1/obj/Debug/net6.0/day1.csproj.CoreCompileInputs.cache
+/home/miku/programming/cs/AOC22/day1/obj/Debug/net6.0/day1.dll
+/home/miku/programming/cs/AOC22/day1/obj/Debug/net6.0/ref/day1.dll
+/home/miku/programming/cs/AOC22/day1/obj/Debug/net6.0/day1.pdb
+/home/miku/programming/cs/AOC22/day1/obj/Debug/net6.0/day1.genruntimeconfig.cache

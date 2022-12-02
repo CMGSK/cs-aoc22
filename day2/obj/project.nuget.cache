@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "nwQH5ys52L9TBkyssXLtwVOQR1bBpsRLGmzvKntSK/1JUeELgxdXnYdxy+/dJUfYBKtz8CI41CZ9XUoiZG3pXQ==",
+  "success": true,
+  "projectFilePath": "/home/miku/programming/cs/AOC22/day2/day2.csproj",
+  "expectedPackageFiles": [
+    "/home/miku/.nuget/packages/microsoft.aspnetcore.app.ref/6.0.11/microsoft.aspnetcore.app.ref.6.0.11.nupkg.sha512"
+  ],
+  "logs": []
+}
