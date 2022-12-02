@@ -6,62 +6,62 @@
       string[] input = File.ReadAllLines("input.txt");
 
       // Part 1 
-      // int points=0;
-      // for (int i=0; i<input.Count(); i++)
-      // {
-      //   int choice=0;
-      //   switch(input[i][input[i].Count()-1])
-      //   {
-      //     case 'X':
-      //       choice += 1;
-      //       break;
-      //     case 'Y':
-      //       choice += 2;
-      //       break;
-      //     case 'Z':
-      //       choice += 3;
-      //       break;
-      //   }
-      //   points += choice;
-      //   switch(input[i][0])
-      //   {
-      //     case 'A':
-      //       if (choice == 1)
-      //       {
-      //         points += 3;
-      //       }
-      //       else if (choice == 2)
-      //       {
-      //         points += 6;
-      //       }
-      //       break;
-      //     case 'B':
-      //       if (choice == 2)
-      //       {
-      //         points += 3;
-      //       }
-      //       else if (choice == 3)
-      //       {
-      //         points += 6;
-      //       }
-      //       break;
-      //     case 'C':
-      //       if (choice == 3)
-      //       {
-      //         points += 3;
-      //       }
-      //       else if (choice == 1)
-      //       {
-      //         points += 6;
-      //       }
-      //       break;
-      //   }
-      // }
-      // Console.WriteLine(points);
+      int points=0;
+      for (int i=0; i<input.Count(); i++)
+      {
+        int choice=0;
+        switch(input[i][input[i].Count()-1])
+        {
+          case 'X':
+            choice += 1;
+            break;
+          case 'Y':
+            choice += 2;
+            break;
+          case 'Z':
+            choice += 3;
+            break;
+        }
+        points += choice;
+        switch(input[i][0])
+        {
+          case 'A':
+            if (choice == 1)
+            {
+              points += 3;
+            }
+            else if (choice == 2)
+            {
+              points += 6;
+            }
+            break;
+          case 'B':
+            if (choice == 2)
+            {
+              points += 3;
+            }
+            else if (choice == 3)
+            {
+              points += 6;
+            }
+            break;
+          case 'C':
+            if (choice == 3)
+            {
+              points += 3;
+            }
+            else if (choice == 1)
+            {
+              points += 6;
+            }
+            break;
+        }
+      }
+      Console.WriteLine(points);
       
       
       // Part 2
-      int points=0;
+      int points=0; //note it already exists in part 1.
       for (int i=0; i<input.Count(); i++)
       {
         int win=0;

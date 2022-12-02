@@ -3,7 +3,7 @@
   class Program
   {
 
-    //C-Sharp way
+    //C-Sharp way (thanks ame)
     public static IEnumerable<long> GroupedElf (string data)
     {
       return data.Split(Environment.NewLine + Environment.NewLine)
