@@ -2,10 +2,9 @@
 {
   class Program
   {
-    public static void Main (string[] args){
-      string[] input = File.ReadAllLines("input.txt");
 
-      // Part 1 
+    static int Part1 (string[] input)
+    {
       int points=0;
       for (int i=0; i<input.Count(); i++)
       {
@@ -57,11 +56,12 @@
             break;
         }
       }
-      Console.WriteLine(points);
-      
-      
-      // Part 2
-      int points=0; //note it already exists in part 1.
+      return points;
+    }
+
+    static int Part2 (string[] input)
+    {
+      int points=0;
       for (int i=0; i<input.Count(); i++)
       {
         int win=0;
@@ -112,7 +112,15 @@
             break;
         }
       }
-      Console.WriteLine(points);
+      return points; 
+    }
+
+    public static void Main (string[] args){
+      string[] input = File.ReadAllLines("input.txt");
+
+      Console.WriteLine(Part1(input));
+      Console.WriteLine(Part2(input));
+      
     }
   }
 } 

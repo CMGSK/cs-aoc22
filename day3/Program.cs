@@ -2,11 +2,8 @@
 {
   class Program
   {
-    public static void Main (string[] args)
+    static int Part1 (string[] input)
     {
-      string[] input = File.ReadAllLines("input.txt");
-
-      //Part 1
       int r = 0;
       foreach (string x in input)
       {
@@ -22,9 +19,11 @@
         }
         r += (int)item > 90 ? (int)item - 96 : (int)item - 38; 
       }
-      Console.WriteLine(r);
+      return r; 
+    }
 
-      //Part 2
+    static int Part2 (string[] input)
+    {
       int res = 0;
       for (int x=0; x<input.Count()-2; x+=3)
       {
@@ -40,7 +39,15 @@
         }
         res += (int)item > 90 ? (int)item - 96 : (int)item - 38; 
       }
-      Console.WriteLine(res);
+      return res; 
+    }
+
+    public static void Main (string[] args)
+    {
+      string[] input = File.ReadAllLines("input.txt");
+
+      Console.WriteLine(Part1(input));
+      Console.WriteLine(Part2(input));
     }
   }
 } 

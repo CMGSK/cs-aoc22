@@ -7,4 +7,4 @@ build_property.InvariantGlobalization =
 build_property.PlatformNeutralAssembly = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = day2
-build_property.ProjectDir = /home/miku/programming/cs/AOC22/day2/
+build_property.ProjectDir = /home/miku/programming/csharp/cs-aoc22/day2/
