@@ -1,0 +1,15 @@
+/home/miku/programming/csharp/cs-aoc22/day5/bin/Debug/net6.0/day5
+/home/miku/programming/csharp/cs-aoc22/day5/bin/Debug/net6.0/day5.deps.json
+/home/miku/programming/csharp/cs-aoc22/day5/bin/Debug/net6.0/day5.runtimeconfig.json
+/home/miku/programming/csharp/cs-aoc22/day5/bin/Debug/net6.0/day5.dll
+/home/miku/programming/csharp/cs-aoc22/day5/bin/Debug/net6.0/ref/day5.dll
+/home/miku/programming/csharp/cs-aoc22/day5/bin/Debug/net6.0/day5.pdb
+/home/miku/programming/csharp/cs-aoc22/day5/obj/Debug/net6.0/day5.csproj.AssemblyReference.cache
+/home/miku/programming/csharp/cs-aoc22/day5/obj/Debug/net6.0/day5.GeneratedMSBuildEditorConfig.editorconfig
+/home/miku/programming/csharp/cs-aoc22/day5/obj/Debug/net6.0/day5.AssemblyInfoInputs.cache
+/home/miku/programming/csharp/cs-aoc22/day5/obj/Debug/net6.0/day5.AssemblyInfo.cs
+/home/miku/programming/csharp/cs-aoc22/day5/obj/Debug/net6.0/day5.csproj.CoreCompileInputs.cache
+/home/miku/programming/csharp/cs-aoc22/day5/obj/Debug/net6.0/day5.dll
+/home/miku/programming/csharp/cs-aoc22/day5/obj/Debug/net6.0/ref/day5.dll
+/home/miku/programming/csharp/cs-aoc22/day5/obj/Debug/net6.0/day5.pdb
+/home/miku/programming/csharp/cs-aoc22/day5/obj/Debug/net6.0/day5.genruntimeconfig.cache
