@@ -20,6 +20,8 @@
       }
       return result;
     }
+
+
     
     static int Part1 (string[] input)
     {

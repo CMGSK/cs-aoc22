@@ -46,7 +46,7 @@
     static long Part1 (string[] input)
     {
       List<Node> Root = new List<Node>();
-      Root.Add(new Node(true, 0, "/", "//"));
+      Root.Add(new Node(true, 0, "/", "ROOT"));
       string LastDir = "/";
       Node LastNode = Root.Last();
       for (int x=0; x<input.Count(); x++) //parse all instructions
@@ -104,7 +104,6 @@
     {
       for (int i=Root.Count()-1; i>=0; i--)
       {
-          Console.WriteLine("here");
         int size=0;
         string last = Root.ElementAt(i).getParent();
         bool refIndex = false;
@@ -135,7 +134,7 @@
 
     public static void Main (string[] args)
     {
-      string[] input = File.ReadAllLines("input.txt");
+      string[] input = File.ReadAllLines("test.txt");
       
       Console.WriteLine(Part1(input));
       Console.WriteLine(Part2(input));
