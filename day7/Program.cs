@@ -2,96 +2,63 @@
 {
   class Program
   {
-    
-    public class Node
-    {
-      bool isDir;
-      int size;
+
+    public class Node {
+
       string name;
-      string parent;
+      List<Tuple<int, string>> files;
+      List<Node> dirs;
+      Node? parent;
 
-      public Node(bool isDir, int size, string name, string parent)
+      public Node (string name, List<Tuple<int, string>> files, List<Node> dirs, Node? parent) //? lets the value be assigned null
       {
-        this.isDir = isDir;
-        this.size = size;
         this.name = name;
-        this.parent = parent;
+        this.files = files;
+        this.dirs = dirs;
+        this.parent = parent ?? null; 
       }
 
-      public void setSize (int n){
-        this.size=n;
-      }
-      public int getSize()
+      public void insertDir (Node n)
       {
-        return size;
+        this.dirs.Add(n);
       }
-      public bool getIsDir()
+      public void insertFile (Tuple<int, string> f)
       {
-        return isDir;
+        this.files.Add(f);
       }
-      public string getName()
+      public Node? getParent ()
       {
-        return name;
+        return parent; 
       }
-      public string getParent()
+      public List<Node> getDirs ()
       {
-        return parent;
+        return dirs; 
       }
-      public void printNode()
+      public List<Tuple<int, string>> getFiles ()
       {
-        Console.WriteLine("{0} {1} {2} {3}", isDir, size, name, parent);
+        return files; 
+      }
+      ////
+      public override string ToString()
+      {
+        string s = $"Name:{this.name}, Files:{this.files.Count}, Dirs:{this.dirs.Count}, Parent:{this.parent?.name}"; 
+        if (this.dirs.Any())
+        {
+          s += "\n";
+          foreach (var thingy in this.dirs) s += $"   {thingy.ToString()}"; 
+        }
+        return s;
       }
     }
 
-    static long Part1 (string[] input)
+    static int Part1 (string[] input)
     {
-      List<Node> Root = new List<Node>();
-      Root.Add(new Node(true, 0, "/", "ROOT"));
-      string LastDir = "/";
-      Node LastNode = Root.Last();
-      for (int x=0; x<input.Count(); x++) //parse all instructions
-      {
-        if (input[x].Contains("$ cd")) // checks if its a cd command
-        {
-          if (input[x] == "$ cd /") continue; //for cd command / do nothing
-          else if (!(input[x].Contains(".."))) //for cd command with name, create a dir node
-          {
-            Root.Add(new Node (true, 0, input[x].Substring(5), LastDir));
-            LastDir = input[x].Substring(5);
-            LastNode = Root.Last();
-          }
-          else //for cd command with .. set last dir to its last node parent and last node to its last node parent
-          {
-            LastDir = LastNode.getParent();
-            for (int i=0; i<Root.Count(); i++)
-            {
-              if (Root.ElementAt(i).getName() == LastNode.getParent())
-              {
-                LastNode=Root.ElementAt(i);
-                break;
-              }
-            }
-          }
-        }
-        else if (input[x].Contains("$ ls")) //ls indicates where were creating files 
-        {
-          x++;
-          while (!(input[x].Contains("$")) && x+1<input.Count()) // && to avoid out of bounds on last items
-          {
-            if(!(input[x].Contains("dir"))) // we ignore dir since we create them with cd commands, therefore only files are created after ls command
-            {
-              Root.Add(new Node(false, 
-                    int.Parse(input[x].Substring(0, input[x].IndexOf(" "))), 
-                    input[x].Substring(input[x].IndexOf(" ")),
-                    LastDir));
-            }
-            x++;
-          }
-        }
+      Node root = getRoot(input);
+      int res=0;
+      for (int i=0; i<root.getDirs().Count(); i++){
+        res+=getDirSize(root.getDirs());
       }
-      // Sanity check
-      foreach (var t in Root) t.printNode();
-      return sizeCalc(Root);
+      return 0;
     }
 
     static int Part2 (string[] input)
@@ -100,42 +67,45 @@
       return 0;
     }
 
-    static long sizeCalc (List<Node> Root)
+    static Node getRoot (string[] input)
     {
-      for (int i=Root.Count()-1; i>=0; i--)
+      Node root = new Node("/", new List<Tuple<int, string>>(), new List<Node>(), null);
+      Node nodeIn = root;
+      for (int i = 1; i < input.Length; i++)
       {
-        int size=0;
-        string last = Root.ElementAt(i).getParent();
-        bool refIndex = false;
-        while (!Root.ElementAt(i).getIsDir() && Root.ElementAt(i).getParent() == last)
+        if (input[i].Contains("dir"))
         {
-          size+=Root.ElementAt(i).getSize();
-          last = Root.ElementAt(i).getParent();
-          i--;
-          refIndex=true;
+          Node aux = new Node(input[i].Split(" ")[^1], new List<Tuple<int, string>>(), new List<Node>(), nodeIn); //takes this position -omitting 0- from the last
+          nodeIn.insertDir(aux);
+          nodeIn = aux;
         }
-        if (refIndex) i++;
-        for(int j=0; j<Root.Count(); j++)
+
+        else if (!input[i].Contains("$") && !input[i].Contains("dir"))
         {
-          if (Root.ElementAt(j).getName() == last) Root.ElementAt(j).setSize(size);
+          nodeIn.insertFile(new Tuple<int, string>(int.Parse(input[i].Split(" ")[0]), input[i].Split(" ")[1]));
+        }
+
+        else if (input[i].Contains("$ cd"))
+        {
+          nodeIn = nodeIn.getParent();
         }
       }
-      //now we sum the folders properly
-      long result=0;
-      for (int i=0; i<Root.Count(); i++)
+      return root;
+    }
+
+    static int getDirSize (Node dir)
+    {
+      int size=0;
+      for (int i=0; i<dir.getFiles().Count(); i++)
       {
-        if (Root.ElementAt(i).getIsDir() && Root.ElementAt(i).getSize() < 100000)
-        {
-          result += Root.ElementAt(i).getSize();
-        }
+        size+=dir.getFiles().ElementAt(i).Item1;
       }
-      return result;
+      return size > 100000 ? 0 : size;
     }
 
     public static void Main (string[] args)
     {
-      string[] input = File.ReadAllLines("test.txt");
-      
+      string[] input = File.ReadAllLines("input.txt");
       Console.WriteLine(Part1(input));
       Console.WriteLine(Part2(input));
     }
