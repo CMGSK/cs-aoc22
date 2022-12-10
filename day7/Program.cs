@@ -5,13 +5,15 @@
 
     public class Node {
 
+      int size;
       string name;
-      List<Tuple<int, string>> files;
+      List<Tuple<int, string>> files; //Needn't tuple i know
       List<Node> dirs;
       Node? parent;
 
-      public Node (string name, List<Tuple<int, string>> files, List<Node> dirs, Node? parent) //? lets the value be assigned null
+      public Node (int size, string name, List<Tuple<int, string>> files, List<Node> dirs, Node? parent) //? lets the value be assigned null
       {
+        this.size = size;
         this.name = name;
         this.files = files;
         this.dirs = dirs;
@@ -26,6 +28,10 @@
       {
         this.files.Add(f);
       }
+      public string getName ()
+      {
+        return name; 
+      }
       public Node? getParent ()
       {
         return parent; 
@@ -38,14 +44,23 @@
       {
         return files; 
       }
+      public int getSize ()
+      {
+        return size; 
+      }
+      public void setSize (int n)
+      {
+        this.size = n; 
+      }
+
       ////
       public override string ToString()
       {
-        string s = $"Name:{this.name}, Files:{this.files.Count}, Dirs:{this.dirs.Count}, Parent:{this.parent?.name}"; 
+        string s = $"Size: {this.size}, Name:{this.name}, Files:{this.files.Count}, Dirs:{this.dirs.Count}, Parent:{this.parent?.name}"; 
         if (this.dirs.Any())
         {
-          s += "\n";
-          foreach (var thingy in this.dirs) s += $"   {thingy.ToString()}"; 
+        s += "\n";
+        foreach (var thingy in this.dirs) s += $"\n{thingy.ToString()}"; 
         }
         return s;
       }
@@ -54,11 +69,9 @@
     static int Part1 (string[] input)
     {
       Node root = getRoot(input);
-      int res=0;
-      for (int i=0; i<root.getDirs().Count(); i++){
-        res+=getDirSize(root.getDirs());
-      }
-      return 0;
+      setDirSize(root);
+      Console.WriteLine(root.ToString());
+      return getDirSize(root);
     }
 
     static int Part2 (string[] input)
@@ -69,45 +82,75 @@
 
     static Node getRoot (string[] input)
     {
-      Node root = new Node("/", new List<Tuple<int, string>>(), new List<Node>(), null);
+      Node root = new Node(0, "/", new List<Tuple<int, string>>(), new List<Node>(), null);
       Node nodeIn = root;
       for (int i = 1; i < input.Length; i++)
       {
         if (input[i].Contains("dir"))
         {
-          Node aux = new Node(input[i].Split(" ")[^1], new List<Tuple<int, string>>(), new List<Node>(), nodeIn); //takes this position -omitting 0- from the last
-          nodeIn.insertDir(aux);
-          nodeIn = aux;
+          Node aux = new Node(0, input[i].Split(" ")[^1], new List<Tuple<int, string>>(), new List<Node>(), nodeIn); //takes this position -omitting 0- from the last
+          nodeIn?.insertDir(aux);
         }
 
         else if (!input[i].Contains("$") && !input[i].Contains("dir"))
         {
-          nodeIn.insertFile(new Tuple<int, string>(int.Parse(input[i].Split(" ")[0]), input[i].Split(" ")[1]));
+          nodeIn?.insertFile(new Tuple<int, string>(int.Parse(input[i].Split(" ")[0]), input[i].Split(" ")[1]));
         }
 
-        else if (input[i].Contains("$ cd"))
+        else if (input[i].Contains("$ cd .."))
         {
-          nodeIn = nodeIn.getParent();
+          nodeIn = nodeIn?.getParent() == null ? null : nodeIn.getParent(); 
+        }
+
+        else if (input[i].Contains("$ cd") && !input[i].Contains(".."))
+        {
+          string toDir = input[i].Substring(5);
+          foreach (Node to in nodeIn?.getDirs())
+          {
+            if (to.getName() == toDir) nodeIn = to;
+          }
         }
       }
       return root;
     }
 
-    static int getDirSize (Node dir)
+    static int setDirSize (Node dir)
     {
       int size=0;
       for (int i=0; i<dir.getFiles().Count(); i++)
       {
         size+=dir.getFiles().ElementAt(i).Item1;
       }
-      return size > 100000 ? 0 : size;
+      if (dir.getDirs().Any())
+      {
+        foreach (var y in dir.getDirs())
+        {
+          size+=setDirSize(y);
+        }
+      }
+      dir.setSize(size);
+      Console.WriteLine(size);
+      return size;
+    }
+
+    static int getDirSize (Node dir)
+    {
+      int size=dir.getSize();
+      if(size > 100000) size = 0;
+      if (dir.getDirs().Any())
+      {
+        foreach (var y in dir.getDirs())
+        {
+          size += getDirSize(y);
+        }
+      }
+      return size; 
     }
 
     public static void Main (string[] args)
     {
       string[] input = File.ReadAllLines("input.txt");
       Console.WriteLine(Part1(input));
-      Console.WriteLine(Part2(input));
     }
   }
 }
