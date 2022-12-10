@@ -163,7 +163,7 @@
       Node root = getRoot(input);
       setDirSize(root);
       int toFree = 30000000 - (70000000 - root.getSize());
-      Console.WriteLine($"Space to free{toFree}");
+      // Console.WriteLine($"Space to free{toFree}");
       return getDelete(root, toFree, root.getSize());
     }
 
