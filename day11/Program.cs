@@ -36,7 +36,7 @@
       int top2=0;
       for (int i=0; i<monkeys.Count(); i++)
       {
-        Console.WriteLine(monkeys[i].getCount());
+        // Console.WriteLine(monkeys[i].getCount());
         if (monkeys[i].getCount() > top1)
         {
           top2 = top1;
@@ -44,6 +44,7 @@
         }
         else if (monkeys[i].getCount() > top2) top2 = monkeys[i].getCount();
       }
+      Console.WriteLine(top1 + " " + top2);
       return top1 * top2;
     }
 
@@ -63,7 +64,6 @@
         A = instructions[0] == "old" ?  worry : int.Parse(instructions[2]);
         B = A!=worry ? worry : int.Parse(instructions[2]); 
       }
-      // Console.WriteLine(instructions[1] == "+" ? Math.Abs((A+B)/3) : Math.Abs((A*B)/3));
       return instructions[1] == "+" ? Math.Abs((A+B)/3) : Math.Abs((A*B)/3);
     }
 
@@ -81,13 +81,13 @@
         i+=5;
         monkeys.Add(tag, monkey);
       }
-      // THIS IS GOOD
-      // for (int m=0; m<monkeys.Count(); m++)
-      // {
-      //   Console.WriteLine($"Monkey{m}");
-      //   foreach(int n in monkeys[m].getItems()) Console.WriteLine(n);
-      // }
       return monkeys;
+    }
+
+    static void prinMonkey (Monkey x)
+    { 
+      Console.WriteLine("count " + x.getItems().Count());
+      foreach (int n in x.getItems()) Console.WriteLine(n);
     }
 
     static void Part1 (string[] input)
@@ -95,14 +95,15 @@
       Dictionary<int, Monkey> monkeys = getMonkeys(input);
       for (int round=0; round<20; round++)
       {
-        // Console.WriteLine(round + "round");
-        for (int m=0; m<monkeys.Count(); m++) monkeys[m].countUp(monkeys[m].getItems().Count());
+        Console.WriteLine("//// Round" + round);
         for (int i=0; i<input.Length; i++)
         {
           int tag = int.Parse(string.Join("", input[i].ToCharArray().Where(Char.IsDigit)));
           i+=2;
+          monkeys[tag].countUp(monkeys[tag].getItems().Count()); //this freaking instruction inside the for got me stucked for 7 hours
           for (int item=0; item<monkeys[tag].getItems().Count(); item++)
           {
+            Console.WriteLine(monkeys[tag].getItems().Count() + " ITEMS HOLDED BY MONKEY " + tag);
             int worry = Inspect(input[i],monkeys[tag].getItems().ElementAt(item));
             int rule = int.Parse(string.Join("", input[i+1].ToCharArray().Where(Char.IsDigit)));
               if (worry%rule==0)
@@ -110,19 +111,19 @@
                 int dest = int.Parse(string.Join("", input[i+2].ToCharArray().Where(Char.IsDigit)));
                 monkeys[dest].addToList(worry);
                 monkeys[tag].delFromList(item);
+                item--;
               }
               else
               {
                 int dest = int.Parse(string.Join("", input[i+3].ToCharArray().Where(Char.IsDigit)));
                 monkeys[dest].addToList(worry);
                 monkeys[tag].delFromList(item);
+                item--;
               }
-              // Console.WriteLine();
             }
           i+=4;
         }
       }
-      Console.WriteLine(monkeys.Count()); 
       Console.WriteLine(getBusiness(monkeys)); 
     }
 
@@ -133,10 +134,9 @@
 
     public static void Main (string[] args)
     {
-      string[] input = File.ReadAllLines("test.txt");
+      string[] input = File.ReadAllLines("input.txt");
       Part1(input);
       Part2(input);
-
     }
   }
 }
