@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/home/miku/programming/csharp/cs-aoc22/day9/day9.csproj": {}
+    "/home/miku/programming/csharp/cs-aoc22/day11Rev/day11Rev.csproj": {}
   },
   "projects": {
-    "/home/miku/programming/csharp/cs-aoc22/day9/day9.csproj": {
+    "/home/miku/programming/csharp/cs-aoc22/day11Rev/day11Rev.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/miku/programming/csharp/cs-aoc22/day9/day9.csproj",
-        "projectName": "day9",
-        "projectPath": "/home/miku/programming/csharp/cs-aoc22/day9/day9.csproj",
+        "projectUniqueName": "/home/miku/programming/csharp/cs-aoc22/day11Rev/day11Rev.csproj",
+        "projectName": "day11Rev",
+        "projectPath": "/home/miku/programming/csharp/cs-aoc22/day11Rev/day11Rev.csproj",
         "packagesPath": "/home/miku/.nuget/packages/",
-        "outputPath": "/home/miku/programming/csharp/cs-aoc22/day9/obj/",
+        "outputPath": "/home/miku/programming/csharp/cs-aoc22/day11Rev/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/miku/.nuget/NuGet/NuGet.Config"
