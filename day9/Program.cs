@@ -67,20 +67,9 @@ namespace day9
           knots[0].move(x);
           for (int j=1; j<knots.Count(); j++)
           {
-            if (Math.Abs(knots[j].getPos().Item1 - knots[j-1].getPos().Item1) > 1 )
+            if (Math.Abs(knots[j].getPos().Item1 - knots[j-1].getPos().Item1) > 1 ) // X axis for the whole if
             {
-              if (knots[j].getPos().Item1 - knots[j-1].getPos().Item1 > 0)
-              {
-                knots[j].adjust(knots[j-1].getPos().Item1, knots[j-1].getPos().Item2-1);
-              }
-              else
-              {
-                knots[j].adjust(knots[j-1].getPos().Item1, knots[j-1].getPos().Item2+1);
-              }
-            }
-            else if (Math.Abs(knots[j].getPos().Item2 - knots[j-1].getPos().Item2) > 1)
-            {
-              if (knots[j].getPos().Item2 - knots[j-1].getPos().Item2 > 0)
+              if (knots[j].getPos().Item1 - knots[j-1].getPos().Item1 < 0) // if head axis pos is bigger than tail
               {
                 knots[j].adjust(knots[j-1].getPos().Item1-1, knots[j-1].getPos().Item2);
               }
@@ -89,19 +78,31 @@ namespace day9
                 knots[j].adjust(knots[j-1].getPos().Item1+1, knots[j-1].getPos().Item2);
               }
             }
+            else if (Math.Abs(knots[j].getPos().Item2 - knots[j-1].getPos().Item2) > 1) // Y axis for the whole if
+            {
+              if (knots[j].getPos().Item2 - knots[j-1].getPos().Item2 < 0) // if head axis pos is bigger than tail
+              {
+                knots[j].adjust(knots[j-1].getPos().Item1, knots[j-1].getPos().Item2-1);
+              }
+              else
+              {
+                knots[j].adjust(knots[j-1].getPos().Item1, knots[j-1].getPos().Item2+1);
+              }
+            }
             positions.Add(knots[j].getPos());
           }
         }
       }
-      printPos(positions);
+      // printPos(positions);
       Console.WriteLine(positions.Count());
     }
 
 
     public static void Main (string[] args)
     {
-       string[] input = File.ReadAllLines("test.txt");
+       string[] input = File.ReadAllLines("input.txt");
        Ex(input, 2);
+       Ex(input, 10);
     }
   }
 }
