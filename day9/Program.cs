@@ -89,7 +89,10 @@ namespace day9
                 knots[j].adjust(knots[j-1].getPos().Item1, knots[j-1].getPos().Item2+1);
               }
             }
-            positions.Add(knots[j].getPos());
+            if(j==numberOfKnots-1)
+            {
+              positions.Add(knots[j].getPos());
+            }
           }
         }
       }
