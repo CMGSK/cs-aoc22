@@ -145,7 +145,7 @@ namespace day9
         }
       }
       // printPos(positions);
-      // ImSorry(positions);
+      ImSorry(positions);
       Console.WriteLine(positions.Count());
     }
 
@@ -153,7 +153,7 @@ namespace day9
     public static void Main (string[] args)
     {
        string[] input = File.ReadAllLines("input.txt");
-       // Ex(input, 2);
+       Ex(input, 2);
        Ex(input, 10);
     }
   }
