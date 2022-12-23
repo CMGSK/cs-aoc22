@@ -1,3 +1,4 @@
+// TODO: Si se ha movido una tail en diagonal, fuerza que el movimiento de la siguiente tambien lo sea
 namespace day9
 {
   class Program
@@ -45,6 +46,32 @@ namespace day9
       }
     }
 
+    static void ImSorry (HashSet<Tuple<int, int>> a) //yea i did this get me to court 
+    {
+      string[][] grid = new string[400][];
+      for (int i=0; i<400; i++)
+      {
+        grid[i] = new string[400];
+        for (int j=0; j<400; j++)
+        {
+          grid[i][j]= ".";
+        }
+      }
+      foreach (var x in a)
+      {
+        grid[x.Item2+100][x.Item1+100] = "#";
+      }
+
+      foreach (var x in grid)
+      {
+        foreach (var y in x)
+        {
+          Console.Write(y);
+        }
+        Console.WriteLine();
+      }
+    }
+
     static void printPos (HashSet<Tuple<int, int>> a)
     {
       foreach (var t in a)
@@ -67,6 +94,27 @@ namespace day9
           knots[0].move(x);
           for (int j=1; j<knots.Count(); j++)
           {
+            //this should let tails move in diagonal when and only when previous tail moves diagonally too, but it brokes it somewhere.
+            // if (Math.Abs(knots[j].getPos().Item1 - knots[j-1].getPos().Item1) !> 1 && Math.Abs(knots[j].getPos().Item2 - knots[j-1].getPos().Item2) !> 1 && j==1) break;
+            if (Math.Abs(knots[j].getPos().Item1 - knots[j-1].getPos().Item1) == 2 && Math.Abs(knots[j].getPos().Item2 - knots[j-1].getPos().Item2) == 2) // && j>1);
+            {
+              if (knots[j].getPos().Item1 - knots[j-1].getPos().Item1 > 0 && knots[j].getPos().Item2 - knots[j-1].getPos().Item2 > 0)
+              {
+                knots[j].adjust(knots[j].getPos().Item1-1, knots[j].getPos().Item2-1);
+              }
+              if (knots[j].getPos().Item1 - knots[j-1].getPos().Item1 > 0 && knots[j].getPos().Item2 - knots[j-1].getPos().Item2 < 0)
+              {
+                knots[j].adjust(knots[j].getPos().Item1-1, knots[j].getPos().Item2+1);
+              }
+              if (knots[j].getPos().Item1 - knots[j-1].getPos().Item1 < 0 && knots[j].getPos().Item2 - knots[j-1].getPos().Item2 > 0)
+              {
+                knots[j].adjust(knots[j].getPos().Item1+1, knots[j].getPos().Item2-1);
+              }
+              if (knots[j].getPos().Item1 - knots[j-1].getPos().Item1 < 0 && knots[j].getPos().Item2 - knots[j-1].getPos().Item2 < 0)
+              {
+                knots[j].adjust(knots[j].getPos().Item1+1, knots[j].getPos().Item2+1);
+              }
+            }
             if (Math.Abs(knots[j].getPos().Item1 - knots[j-1].getPos().Item1) > 1 ) // X axis for the whole if
             {
               if (knots[j].getPos().Item1 - knots[j-1].getPos().Item1 < 0) // if head axis pos is bigger than tail
@@ -78,7 +126,7 @@ namespace day9
                 knots[j].adjust(knots[j-1].getPos().Item1+1, knots[j-1].getPos().Item2);
               }
             }
-            else if (Math.Abs(knots[j].getPos().Item2 - knots[j-1].getPos().Item2) > 1) // Y axis for the whole if
+            if (Math.Abs(knots[j].getPos().Item2 - knots[j-1].getPos().Item2) > 1) // Y axis for the whole if
             {
               if (knots[j].getPos().Item2 - knots[j-1].getPos().Item2 < 0) // if head axis pos is bigger than tail
               {
@@ -97,6 +145,7 @@ namespace day9
         }
       }
       // printPos(positions);
+      // ImSorry(positions);
       Console.WriteLine(positions.Count());
     }
 
@@ -104,7 +153,7 @@ namespace day9
     public static void Main (string[] args)
     {
        string[] input = File.ReadAllLines("input.txt");
-       Ex(input, 2);
+       // Ex(input, 2);
        Ex(input, 10);
     }
   }
