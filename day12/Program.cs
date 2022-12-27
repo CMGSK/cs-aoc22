@@ -25,6 +25,23 @@
       public List<Position> getOptions (char[][] input, Position back) 
       { //each if checks if +/-1 position of axis can be accesible and adds it to a list if so
         List<Position> list = new();
+        if (XY.Item2+1 < input[XY.Item1].Count() &&
+            back.getPos() != new Tuple<int, int>(XY.Item1, XY.Item2+1) &&
+            (Math.Abs(input[XY.Item1][XY.Item2+1] - point) < 2 || ((point=='z' || point=='y') && input[XY.Item1][XY.Item2+1] == 'E')))
+        {
+        list.Add(new Position(input[XY.Item1][XY.Item2+1], 
+              new Tuple<int, int>(XY.Item1, XY.Item2+1), 
+              distance+1));
+        }
+        if (XY.Item2-1 >= 0 &&
+            back.getPos() != new Tuple<int, int>(XY.Item1, XY.Item2-1) &&
+
+            (Math.Abs(input[XY.Item1][XY.Item2-1] - point) < 2 || ((point=='z' || point=='y') && input[XY.Item1][XY.Item2-1] == 'E')))
+        {
+        list.Add(new Position(input[XY.Item1][XY.Item2-1], 
+              new Tuple<int, int>(XY.Item1, XY.Item2-1), 
+              distance+1));
+        }
         if (XY.Item1-1 >= 0 &&
             back.getPos() != new Tuple<int, int>(XY.Item1-1, XY.Item2) &&
             (Math.Abs(input[XY.Item1-1][XY.Item2] - point) < 2 || ((point=='z' || point=='y') && input[XY.Item1-1][XY.Item2] == 'E')))
@@ -39,23 +56,6 @@
         {
         list.Add(new Position(input[XY.Item1+1][XY.Item2],
               new Tuple<int, int>(XY.Item1+1, XY.Item2), 
-              distance+1));
-        }
-        if (XY.Item2-1 >= 0 &&
-            back.getPos() != new Tuple<int, int>(XY.Item1, XY.Item2-1) &&
-
-            (Math.Abs(input[XY.Item1][XY.Item2-1] - point) < 2 || ((point=='z' || point=='y') && input[XY.Item1][XY.Item2-1] == 'E')))
-        {
-        list.Add(new Position(input[XY.Item1][XY.Item2-1], 
-              new Tuple<int, int>(XY.Item1, XY.Item2-1), 
-              distance+1));
-        }
-        if (XY.Item2+1 < input[XY.Item1].Count() &&
-            back.getPos() != new Tuple<int, int>(XY.Item1, XY.Item2+1) &&
-            (Math.Abs(input[XY.Item1][XY.Item2+1] - point) < 2 || ((point=='z' || point=='y') && input[XY.Item1][XY.Item2+1] == 'E')))
-        {
-        list.Add(new Position(input[XY.Item1][XY.Item2+1], 
-              new Tuple<int, int>(XY.Item1, XY.Item2+1), 
               distance+1));
         }
         return list;
@@ -75,9 +75,14 @@
 
     static void Ex1 (char[][] input)
     {
+      int i=0;
+      for (; i<input.Length; i++)
+      {
+        if (input[i][0] == 'S') break;
+      }
       Queue<Position> Q = new Queue<Position>();
       HashSet<Tuple<int, int>> visited = new();
-      Position S = new Position ('a', new Tuple<int, int>(0,0), 0);
+      Position S = new Position ('a', new Tuple<int, int>(i,0), 0);
       Q.Enqueue(S);
       Position current = S;
       while (current.getPoint()!= 'E')
