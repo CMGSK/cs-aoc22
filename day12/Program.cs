@@ -87,7 +87,6 @@
           if (input[i][j] == 'E')
           {
             E = new Tuple<int, int>(i,j);
-            Console.WriteLine($"Position of E: {i}, {j}");
           }
         }
       }
@@ -99,19 +98,15 @@
       {
         current = Q.Dequeue();
         List<Position> paths = current.getOptions(input);
-        Console.WriteLine($"Accesible paths from {current.XY.Item1},{current.XY.Item2}: {paths.Count()}\nNot Visited:");
         foreach (var path in paths) 
         {
           if (!isVisited(visited, path)) //also checks for shorter paths
           {
-            Console.WriteLine($"{path.XY.Item1}, {path.XY.Item2} - Distance:{path.distance}");
             Q.Enqueue(path);
           }
           visited.Add(path); // this gotta be here to avoid enqueuing duplicates
         }
-        Console.WriteLine("\n");
       }
-      Console.WriteLine(current.distance);
     }
 
     public static void Main (string[] args)
