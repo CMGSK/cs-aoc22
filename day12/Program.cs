@@ -18,13 +18,13 @@
       
       public List<Position> getOptions (char[][] input) 
       { //each if checks if +/-1 position of axis can be accesible and adds it to a list if so
-        bool goalReachable = (point == 'a' || point=='b');
+        bool goalReachable = (point == 'b'); //|| point=='a'); uncomment for part1
         List<Position> opt = new();
-
+// change 'a' for 'S' for part1
         if (XY.Item2+1 < input[XY.Item1].Length) //Getting path East
         {
           char East = input[XY.Item1][XY.Item2+1];
-          if (point - East < 2 || (goalReachable && East == 'S'))
+          if (point - East < 2 || (goalReachable && East == 'a'))
           {
             opt.Add(new Position(East, new Tuple<int, int>(XY.Item1, XY.Item2+1), distance+1));
           }
@@ -32,7 +32,7 @@
         if (XY.Item2-1 >= 0)
         {
           char West = input[XY.Item1][XY.Item2-1];
-          if (point - West < 2 || (goalReachable && West == 'S'))
+          if (point - West < 2 || (goalReachable && West == 'a'))
           {
             opt.Add(new Position(West, new Tuple<int, int>(XY.Item1, XY.Item2-1), distance+1));
           }
@@ -40,7 +40,7 @@
         if (XY.Item1-1 >= 0)
         {
           char North = input[XY.Item1-1][XY.Item2]; 
-          if (point - North < 2 || (goalReachable && North == 'S'))
+          if (point - North < 2 || (goalReachable && North == 'a'))
           {
             opt.Add(new Position(North, new Tuple<int, int>(XY.Item1-1, XY.Item2), distance+1));
           }
@@ -48,7 +48,7 @@
         if (XY.Item1+1 < input.Length)
         {
           char South = input[XY.Item1+1][XY.Item2];
-          if (point - South < 2 || (goalReachable && South == 'S'))
+          if (point - South < 2 || (goalReachable && South == 'a'))
           {
             opt.Add(new Position(South, new Tuple<int, int>(XY.Item1+1, XY.Item2), distance+1));
           }
@@ -95,7 +95,7 @@
       HashSet<Position> visited = new();
       Position current = new Position ('z', E, 0);
       Q.Enqueue(current);
-      while (current.point != 'S')
+      while (current.point != 'a') //change to 'S' for part1
       {
         current = Q.Dequeue();
         List<Position> paths = current.getOptions(input);
