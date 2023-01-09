@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/miku/programming/csharp/cs-aoc22/day12/day12.csproj",
+      "projectUniqueName": "/home/miku/programming/cs/cs-aoc22/day12/day12.csproj",
       "projectName": "day12",
-      "projectPath": "/home/miku/programming/csharp/cs-aoc22/day12/day12.csproj",
+      "projectPath": "/home/miku/programming/cs/cs-aoc22/day12/day12.csproj",
       "packagesPath": "/home/miku/.nuget/packages/",
-      "outputPath": "/home/miku/programming/csharp/cs-aoc22/day12/obj/",
+      "outputPath": "/home/miku/programming/cs/cs-aoc22/day12/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/home/miku/.nuget/NuGet/NuGet.Config"

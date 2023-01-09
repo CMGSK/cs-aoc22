@@ -107,6 +107,7 @@
           visited.Add(path); // this gotta be here to avoid enqueuing duplicates
         }
       }
+      Console.WriteLine(current.distance); // Result
     }
 
     public static void Main (string[] args)

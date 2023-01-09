@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "1EXRt6EPCeCCqJnIPpxxMvBTeSXdk/fBGKiFWuyuj10ptznCGzpvO3mkwj8Bquymi11HPvykI1XfvaGWhbjLTg==",
+  "dgSpecHash": "8IC5UygQL83+QjNdiDm3dIbYCvMXpApGq8+Gr5ZwHXdhtWO7qZrCfMBK3gLdiLMHGY0g5h+uy+SN99/FKlcowQ==",
   "success": true,
-  "projectFilePath": "/home/miku/programming/csharp/cs-aoc22/day12/day12.csproj",
+  "projectFilePath": "/home/miku/programming/cs/cs-aoc22/day12/day12.csproj",
   "expectedPackageFiles": [
     "/home/miku/.nuget/packages/microsoft.aspnetcore.app.ref/6.0.12/microsoft.aspnetcore.app.ref.6.0.12.nupkg.sha512"
   ],
